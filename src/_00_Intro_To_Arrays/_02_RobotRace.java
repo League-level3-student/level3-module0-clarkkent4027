@@ -11,7 +11,7 @@ public class _02_RobotRace {
 	public static void main(String[] args) {
 
 		// 2. create an array of 5 robots.
-		Robot[] racers = new Robot[5];
+		Robot[] racers = new Robot[4];
 		{
 			// 3. use a for loop to initialize the robots.
 			for (int i = 0; i < racers.length; i++) {
@@ -22,37 +22,38 @@ public class _02_RobotRace {
 			racers[1].moveTo(250, 550);
 			racers[2].moveTo(400, 550);
 			racers[3].moveTo(550, 550);
-			racers[4].moveTo(700, 550);
+
 			// 5. use another for loop to iterate through the array and make each robot move
 			// a random amount less than 50.
 			Random Randy = new Random();
 
-			racers[0].setSpeed(3);
-			racers[1].setSpeed(3);
-			racers[2].setSpeed(3);
-			racers[3].setSpeed(3);
-			racers[4].setSpeed(3);
+			racers[0].setSpeed(10);
+			racers[1].setSpeed(10);
+			racers[2].setSpeed(10);
+			racers[3].setSpeed(10);
 
 			// 6. use a while loop to repeat step 5 until a robot has reached the top of the
 			// screen.
+			int winner = 0;
 			boolean b = true;
-			while(b==true) {
-				
-			
-			for (int i = 0; i < racers.length; i++) {
-				racers[i].move(Randy.nextInt(50));
-				if (racers[i].getY()<100) {
-					  b = false;
+			while (b == true) {
+				for (int i = 0; i < racers.length; i++) {
+					racers[i].move(Randy.nextInt(50));
+					if (racers[i].getY() < 50) {
+						b = false;
+						winner = i;
+						break;
+					}
 				}
-					
-				
-			}
+
 			}
 			// 7. declare that robot the winner and throw it a party!
-JOptionPane.showMessageDialog(null, "YAY!!! Bot 3 won!!!");
+			JOptionPane.showMessageDialog(null, "YAY!!! Bot " + winner + " won!!!");
+
 			// 8. try different races with different amounts of robots.
 
 			// 9. make the robots race around a circular track.
+
 		}
 	}
 }
