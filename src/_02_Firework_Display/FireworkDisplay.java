@@ -34,8 +34,8 @@ public class FireworkDisplay extends JPanel implements ActionListener {
         window.setLayout(new BorderLayout());
         window.add(this, BorderLayout.CENTER);
 
-        WIDTH = Toolkit.getDefaultToolkit().getScreenSize().width;
-        HEIGHT = Toolkit.getDefaultToolkit().getScreenSize().height;
+        WIDTH = Toolkit.getDefaultToolkit().getScreenSize().width - 200;
+        HEIGHT = Toolkit.getDefaultToolkit().getScreenSize().height -200;
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
 
         buttonPanel = new JPanel();
