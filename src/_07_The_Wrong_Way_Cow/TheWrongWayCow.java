@@ -64,29 +64,38 @@ public class TheWrongWayCow {
 		for (int i = 0; i < field.length; i++) {
 			for (int j = 0; j < field[i].length; j++) {
 				if (field[i][j] == 'c') {
-if (field[i].length - 1 > j && field[i+1][j] == 'o' && field[i+2][j] == 'w') {
-	rightway = rightway+1;
-	rightc[0] = i;
-	rightc[1] = j;
-			}
-if (field[i].length - 2 > j && field[i-1][j] == 'o' && field[i-2][j] == 'w') {
-	leftway = leftway+1;
-	leftc[0] = i;
-	leftc[1] = j;
-			}
-if (field[i].length - 1 > j && field[i][j+1] == 'o' && field[i][j+2] == 'w') {
-	downway = downway+1;
-	downc[0] = i;
-	downc[1] = j;
-			}
-if (field[i].length - 2 > j && field[i][j-1] == 'o' && field[i][j-2] == 'w') {
-	upway = upway+1;
-	upc[0] = i;
-	upc[1] = j;
-			}
+					if (field.length - 2 > i && field[i + 1][j] == 'o' && field[i + 2][j] == 'w') {
+						rightway = rightway + 1;
+						rightc[0] = j;
+						rightc[1] = i;
+					}
+					if (i >= 2 && field[i - 1][j] == 'o' && field[i - 2][j] == 'w') {
+						leftway = leftway + 1;
+						leftc[0] = j;
+						leftc[1] = i;
+					}
+					if (field[i].length - 2 > j && field[i][j + 1] == 'o' && field[i][j + 2] == 'w') {
+						downway = downway + 1;
+						downc[0] = j;
+						downc[1] = i;
+					}
+					if (j >= 2 && field[i][j - 1] == 'o' && field[i][j - 2] == 'w') {
+						upway = upway + 1;
+						upc[0] = j;
+						upc[1] = i;
+					}
 				}
 			}
 		}
-		return null;
+		if (rightway == 1) {
+			return rightc;
+		} else if (leftway == 1) {
+			return leftc;
+		} else if (downway == 1) {
+			return downc;
+		} else {
+			return upc;
+		}
+
 	}
 }
