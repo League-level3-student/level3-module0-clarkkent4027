@@ -3,6 +3,7 @@ package _05_Pixel_Art;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -46,18 +47,19 @@ public class GridPanel extends JPanel {
 		}
 
 	}
+
 	public int getWindowWidth() {
 		return this.windowWidth;
 	}
-	
+
 	public int getWindowHeight() {
 		return this.windowHeight;
 	}
-	
+
 	public int getRows() {
 		return this.rows;
 	}
-	
+
 	public int getCols() {
 		return this.cols;
 	}
@@ -74,30 +76,58 @@ public class GridPanel extends JPanel {
 
 	@Override
 	public void paintComponent(Graphics g) {
+		for (int i = 0; i < pixels.length; i++) {
+			for (int j = 0; j < pixels[i].length; j++) {
+				g.setColor(pixels[i][j].color);
+				g.fillRect(pixels[i][j].x, pixels[i][j].y, pixelWidth, pixelHeight);
+				g.setColor(color.BLACK);
+				g.drawRect(pixels[i][j].x, pixels[i][j].y, pixelWidth, pixelHeight);
+			}
+		}
+	}
+
+	public void load() {
 		// 4. Iterate through the array.
 		// For every pixel in the list, fill in a rectangle using the pixel's color.
 		// Then, use drawRect to add a grid pattern to your display.
+
 		try {
-			FileReader fr = new FileReader("src/_05_Pixel_Art/Pixels");
-			int c = fr.read();
-			while(c != -1){
-				for (int k = 0; k < pixels.length; k++) {
-					for (int l = 0; l < pixels[k].length; l++) {
-						g.setColor(pixels[k][l].color);
-						g.fillRect(pixels[k][l].x, pixels[k][l].y, pixelWidth, pixelHeight);
-						g.setColor(color.BLACK);
-						g.drawRect(pixels[k][l].x, pixels[k][l].y, pixelWidth, pixelHeight);
-					}
+			BufferedReader br = new BufferedReader(new FileReader("src/_05_Pixel_Art/Pixels"));
+
+			String line = br.readLine();
+			windowWidth = Integer.parseInt(line);
+			line = br.readLine();
+			windowHeight = Integer.parseInt(line);
+			line = br.readLine();
+			cols = Integer.parseInt(line);
+			line = br.readLine();
+			rows = Integer.parseInt(line);
+			pixels = new Pixel[rows][cols];
+
+			for (int i = 0; i < pixels.length; i++) {
+				for (int j = 0; j < pixels[i].length; j++) {
+					pixels[i][j] = new Pixel(i * pixelWidth, j * pixelHeight);
+					line = br.readLine();
+					String[] values = line.split(" ");
+					int X = Integer.parseInt(values[0]);
+					int Y = Integer.parseInt(values[1]);
+					int R = Integer.parseInt(values[2]);
+					int G = Integer.parseInt(values[3]);
+					int B = Integer.parseInt(values[4]);
+					Color c = new Color(R, G, B);
+
+					pixels[i][j].color = c;
 				}
-				c = fr.read();
 			}
-			fr.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			
+		
+			br.close();
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
-
 }

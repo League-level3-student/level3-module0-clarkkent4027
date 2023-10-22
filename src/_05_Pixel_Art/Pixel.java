@@ -12,4 +12,9 @@ public class Pixel{
         this.y = y;
         color = Color.WHITE;
     }
+    
+    public String toString()
+    {
+    	return this.x + " " + this.y + " " +this.color.getRed() + " " + this.color.getGreen() + " " + this.color.getBlue() + "\n";
+    }
 }

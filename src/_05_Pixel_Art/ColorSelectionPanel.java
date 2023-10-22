@@ -39,8 +39,9 @@ public class ColorSelectionPanel extends JPanel implements MouseListener, Change
 	private JLabel colorLabel;
 	private BufferedImage colorImage;
 	Pixel[][] pix;
+	GridPanel G;
 
-	public ColorSelectionPanel(Pixel[][] pix, GridPanel) {
+	public ColorSelectionPanel(GridPanel GP) {
 		rSlider = new JSlider(JSlider.VERTICAL);
 		gSlider = new JSlider(JSlider.VERTICAL);
 		bSlider = new JSlider(JSlider.VERTICAL);
@@ -62,7 +63,8 @@ public class ColorSelectionPanel extends JPanel implements MouseListener, Change
 		button.addActionListener(this);
 
 		addMouseListener(this);
-		this.pix = pix;
+		this.pix = GP.pixels;
+		this.G = GP;
 		colorLabel = new JLabel();
 		colorImage = new BufferedImage(MAX_COLOR, MAX_COLOR, BufferedImage.TYPE_INT_RGB);
 		color = new Color(r, g, b);
@@ -143,15 +145,14 @@ public class ColorSelectionPanel extends JPanel implements MouseListener, Change
 
 			try {
 				FileWriter fw = new FileWriter("src/_05_Pixel_Art/Pixels");
-fw.write(getWindowWidth());
+				fw.write(G.getWindowWidth() );
+				fw.write(G.getWindowHeight() );
+				fw.write(G.getCols() );
+				fw.write(G.getRows() );
 				for (int i = 0; i < this.pix.length; i++) {
 					for (int j = 0; j < this.pix[i].length; j++) {
-						fw.write(this.pix[i][j].x);
-						fw.write(this.pix[i][j].y);
-						fw.write(this.pix[i][j].color.getRed());
-						fw.write(this.pix[i][j].color.getGreen());
-						fw.write(this.pix[i][j].color.getBlue());
-						System.out.println("W: "+  + "\nH: " + getHeight() +"\nX: "+ this.pix[i][j].x + "\nY: "+this.pix[i][j].y+ "\nRED: "+this.pix[i][j].color.getRed()+ "\nGREEN: "+this.pix[i][j].color.getGreen()+ "\nBLUE: "+this.pix[i][j].color.getBlue()+"\n");
+						fw.write(this.pix[i][j].toString());
+						System.out.println("\nX: "+ this.pix[i][j].x + "\nY: "+this.pix[i][j].y+ "\nRED: "+this.pix[i][j].color.getRed()+ "\nGREEN: "+this.pix[i][j].color.getGreen()+ "\nBLUE: "+this.pix[i][j].color.getBlue()+"\n");
 					}
 				}
 				fw.close();
