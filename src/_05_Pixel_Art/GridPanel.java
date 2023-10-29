@@ -19,6 +19,7 @@ public class GridPanel extends JPanel {
 	private int pixelHeight;
 	private int rows;
 	private int cols;
+	private boolean loaded;
 
 	// 1. Create a 2D array of pixels. Do not initialize it yet.
 	Pixel pixels[][];
@@ -29,7 +30,7 @@ public class GridPanel extends JPanel {
 		this.windowHeight = h;
 		this.rows = r;
 		this.cols = c;
-
+		this.loaded = false;
 		this.pixelWidth = windowWidth / cols;
 		this.pixelHeight = windowHeight / rows;
 
@@ -54,6 +55,14 @@ public class GridPanel extends JPanel {
 
 	public int getWindowHeight() {
 		return this.windowHeight;
+	}
+
+	public int getPixelWidth() {
+		return this.pixelWidth;
+	}
+
+	public int getPixelHeight() {
+		return this.pixelHeight;
 	}
 
 	public int getRows() {
@@ -84,6 +93,7 @@ public class GridPanel extends JPanel {
 				g.drawRect(pixels[i][j].x, pixels[i][j].y, pixelWidth, pixelHeight);
 			}
 		}
+		 this.load();
 	}
 
 	public void load() {
@@ -95,33 +105,37 @@ public class GridPanel extends JPanel {
 			BufferedReader br = new BufferedReader(new FileReader("src/_05_Pixel_Art/Pixels"));
 
 			String line = br.readLine();
-			windowWidth = Integer.parseInt(line);
-			line = br.readLine();
-			windowHeight = Integer.parseInt(line);
-			line = br.readLine();
-			cols = Integer.parseInt(line);
-			line = br.readLine();
-			rows = Integer.parseInt(line);
-			pixels = new Pixel[rows][cols];
+			if (line != null && !loaded) {
+				this.windowWidth = Integer.parseInt(line);
+				line = br.readLine();
+				this.windowHeight = Integer.parseInt(line);
+				line = br.readLine();
+				this.pixelWidth = Integer.parseInt(line);
+				line = br.readLine();
+				this.pixelHeight = Integer.parseInt(line);
+				line = br.readLine();
+				this.cols = Integer.parseInt(line);
+				line = br.readLine();
+				this.rows = Integer.parseInt(line);
+				line = br.readLine();
+				pixels = new Pixel[rows][cols];
 
-			for (int i = 0; i < pixels.length; i++) {
-				for (int j = 0; j < pixels[i].length; j++) {
-					pixels[i][j] = new Pixel(i * pixelWidth, j * pixelHeight);
-					line = br.readLine();
-					String[] values = line.split(" ");
-					int X = Integer.parseInt(values[0]);
-					int Y = Integer.parseInt(values[1]);
-					int R = Integer.parseInt(values[2]);
-					int G = Integer.parseInt(values[3]);
-					int B = Integer.parseInt(values[4]);
-					Color c = new Color(R, G, B);
+				for (int i = 0; i < pixels.length; i++) {
+					for (int j = 0; j < pixels[i].length; j++) {
+						pixels[i][j] = new Pixel(i * pixelWidth, j * pixelHeight);
+						String[] values = line.split(" ");
+						int R = Integer.parseInt(values[0]);
+						int G = Integer.parseInt(values[1]);
+						int B = Integer.parseInt(values[2]);
+						Color c = new Color(R, G, B);
 
-					pixels[i][j].color = c;
+						pixels[i][j].color = c;
+						line = br.readLine();
+					}
 				}
+				loaded = true;
+				br.close();
 			}
-			
-		
-			br.close();
 		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

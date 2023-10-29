@@ -6,36 +6,55 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class GridInputPanel extends JPanel{
+public class GridInputPanel extends JPanel {
     private static final long serialVersionUID = 1L;
     private JTextField windowWidthField;
     private JTextField windowHeightField;
     private JTextField rowsField;
     private JTextField colsField;
     private JButton submitButton;
+    
 
     PixelArtMaker pam;
 
     public GridInputPanel(PixelArtMaker pam) {
         this.pam = pam;
+       int response = JOptionPane.showOptionDialog(null, "Would you like to load previous art?", "Make your choice, or DIE!", JOptionPane.YES_OPTION, JOptionPane.NO_OPTION, null, null, null);
+        if(response == 0)
+        {
+        	//pam.submitGridData(pam.csp.G.getWindowWidth(), pam.csp.G.getWindowHeight(), pam.csp.G.getRows(), pam.csp.G.getCols());
+        	this.GIP(pam);
+        }
+        else if (response == 1) 
+        {
+        	this.GIP(pam);
+        }
+        else
+        {
+        	this.GIP(pam);
+        }
+       
+        
+    }
+    
+    public void GIP(PixelArtMaker pam) {
+    	   this.pam = pam;
+    	   windowWidthField = new JTextField(5);
+           windowHeightField = new JTextField(5);
+           rowsField = new JTextField(5);
+           colsField = new JTextField(5);
+           submitButton = new JButton("Submit");
+           add(new JLabel("\tscreen width:"));
+	        add(windowWidthField);
+	        add(new JLabel("\tscreen height:"));
+	        add(windowHeightField);
+	        add(new JLabel("\ttotal rows:"));
+	        add(rowsField);
+	        add(new JLabel("\ttotal columns:"));
+	        add(colsField);
+	        add(submitButton);
 
-        windowWidthField = new JTextField(5);
-        windowHeightField = new JTextField(5);
-        rowsField = new JTextField(5);
-        colsField = new JTextField(5);
-        submitButton = new JButton("Submit");
-
-        add(new JLabel("screen width:"));
-        add(windowWidthField);
-        add(new JLabel("\tscreen height:"));
-        add(windowHeightField);
-        add(new JLabel("\ttotal rows:"));
-        add(rowsField);
-        add(new JLabel("\ttotal columns:"));
-        add(colsField);
-        add(submitButton);
-
-        submitButton.addActionListener((e)->submit());
+	        submitButton.addActionListener((e)->submit());
     }
 
     private void submit() {
@@ -67,6 +86,5 @@ public class GridInputPanel extends JPanel{
     private void invalidateInput() {
         JOptionPane.showMessageDialog(null, "Be sure all fields are complete with positive numbers.", "ERROR", 0);
     }
-
 
 }
