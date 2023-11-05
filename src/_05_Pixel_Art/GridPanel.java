@@ -13,12 +13,12 @@ import javax.swing.JPanel;
 public class GridPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private int windowWidth;
-	private int windowHeight;
+	public int windowWidth;
+	public int windowHeight;
 	private int pixelWidth;
 	private int pixelHeight;
-	private int rows;
-	private int cols;
+	public int rows;
+	public int cols;
 	private boolean loaded;
 
 	// 1. Create a 2D array of pixels. Do not initialize it yet.
@@ -103,21 +103,21 @@ public class GridPanel extends JPanel {
 
 		try {
 			BufferedReader br = new BufferedReader(new FileReader("src/_05_Pixel_Art/Pixels"));
-
 			String line = br.readLine();
 			if (line != null && !loaded) {
 				this.windowWidth = Integer.parseInt(line);
 				line = br.readLine();
 				this.windowHeight = Integer.parseInt(line);
 				line = br.readLine();
-				this.pixelWidth = Integer.parseInt(line);
-				line = br.readLine();
-				this.pixelHeight = Integer.parseInt(line);
-				line = br.readLine();
 				this.cols = Integer.parseInt(line);
 				line = br.readLine();
 				this.rows = Integer.parseInt(line);
 				line = br.readLine();
+				this.pixelWidth = Integer.parseInt(line);
+				line = br.readLine();
+				this.pixelHeight = Integer.parseInt(line);
+				line = br.readLine();
+				
 				pixels = new Pixel[rows][cols];
 
 				for (int i = 0; i < pixels.length; i++) {
@@ -135,6 +135,8 @@ public class GridPanel extends JPanel {
 				}
 				loaded = true;
 				br.close();
+				System.out.println("loaded");
+				System.out.println(this.windowWidth + " " + this.windowHeight + " " + this.cols + " " + this.rows + " " + this.pixelWidth + " " + this.pixelHeight);
 			}
 		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block

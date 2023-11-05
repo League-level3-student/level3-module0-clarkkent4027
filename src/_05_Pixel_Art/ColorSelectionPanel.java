@@ -147,14 +147,13 @@ public class ColorSelectionPanel extends JPanel implements MouseListener, Change
 				FileWriter fw = new FileWriter("src/_05_Pixel_Art/Pixels");
 				fw.write(G.getWindowWidth() +"\n");
 				fw.write(G.getWindowHeight()  +"\n");
-				fw.write(G.getPixelWidth()  +"\n");
-				fw.write(G.getPixelHeight() +"\n" );
 				fw.write(G.getCols()  +"\n");
 				fw.write(G.getRows()  +"\n");
+				fw.write(G.getPixelWidth()  +"\n");
+				fw.write(G.getPixelHeight() +"\n" );
 				for (int i = 0; i < this.pix.length; i++) {
 					for (int j = 0; j < this.pix[i].length; j++) {
 						fw.write(this.pix[i][j].color.getRed()+ " "+this.pix[i][j].color.getGreen()+ " "+this.pix[i][j].color.getBlue() +"\n");
-						//System.out.println(this.pix[i][j].color.getRed()+ " "+this.pix[i][j].color.getGreen()+ " "+this.pix[i][j].color.getBlue() +"\n");
 					}
 				}
 				fw.close();

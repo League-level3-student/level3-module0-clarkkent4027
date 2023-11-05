@@ -9,24 +9,39 @@ import javax.swing.JFrame;
 public class PixelArtMaker implements MouseListener{
     private JFrame window;
     private GridInputPanel gip;
-    private GridPanel gp;
+    public GridPanel gp;
     ColorSelectionPanel csp;
     public void start() {
         gip = new GridInputPanel(this);	
         window = new JFrame("Pixel Art");
         window.setLayout(new FlowLayout());
         window.setResizable(false);
-
         window.add(gip);
         window.pack();
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setVisible(true);
+        
     }
 
     public void submitGridData(int w, int h, int r, int c) {
         gp = new GridPanel(w, h, r, c);
         csp = new ColorSelectionPanel(gp);
         window.remove(gip);
+        window.add(gp);
+        window.add(csp);
+        gp.repaint();
+        gp.addMouseListener(this);
+        window.pack();
+    }
+    
+    public void loadGridData(int w, int h, int r, int c) {
+    	 window = new JFrame("Pixel Art");
+         window.setLayout(new FlowLayout());
+         window.setResizable(false);
+         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+         window.setVisible(true);
+        gp = new GridPanel(w, h, r, c);
+        csp = new ColorSelectionPanel(gp);
         window.add(gp);
         window.add(csp);
         gp.repaint();
