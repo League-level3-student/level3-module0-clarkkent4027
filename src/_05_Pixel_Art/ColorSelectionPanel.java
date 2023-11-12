@@ -38,7 +38,7 @@ public class ColorSelectionPanel extends JPanel implements MouseListener, Change
 
 	private JLabel colorLabel;
 	private BufferedImage colorImage;
-	Pixel[][] pix;
+//	Pixel[][] pix;
 	GridPanel G;
 
 	public ColorSelectionPanel(GridPanel GP) {
@@ -63,7 +63,7 @@ public class ColorSelectionPanel extends JPanel implements MouseListener, Change
 		button.addActionListener(this);
 
 		addMouseListener(this);
-		this.pix = GP.pixels;
+	//	this.pix = GP.pixels;
 		this.G = GP;
 		colorLabel = new JLabel();
 		colorImage = new BufferedImage(MAX_COLOR, MAX_COLOR, BufferedImage.TYPE_INT_RGB);
@@ -151,9 +151,9 @@ public class ColorSelectionPanel extends JPanel implements MouseListener, Change
 				fw.write(G.getRows()  +"\n");
 				fw.write(G.getPixelWidth()  +"\n");
 				fw.write(G.getPixelHeight() +"\n" );
-				for (int i = 0; i < this.pix.length; i++) {
-					for (int j = 0; j < this.pix[i].length; j++) {
-						fw.write(this.pix[i][j].color.getRed()+ " "+this.pix[i][j].color.getGreen()+ " "+this.pix[i][j].color.getBlue() +"\n");
+				for (int i = 0; i < G.pixels.length; i++) {
+					for (int j = 0; j < G.pixels[i].length; j++) {
+						fw.write(G.pixels[i][j].color.getRed()+ " "+ G.pixels[i][j].color.getGreen()+ " "+ G.pixels[i][j].color.getBlue() +"\n");
 					}
 				}
 				fw.close();

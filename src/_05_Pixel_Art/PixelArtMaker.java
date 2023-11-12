@@ -35,6 +35,7 @@ public class PixelArtMaker implements MouseListener{
     }
     
     public void loadGridData(int w, int h, int r, int c) {
+    	System.out.println("loading");
     	 window = new JFrame("Pixel Art");
          window.setLayout(new FlowLayout());
          window.setResizable(false);

@@ -93,7 +93,7 @@ public class GridPanel extends JPanel {
 				g.drawRect(pixels[i][j].x, pixels[i][j].y, pixelWidth, pixelHeight);
 			}
 		}
-		 this.load();
+		// this.load();
 	}
 
 	public void load() {
@@ -135,7 +135,6 @@ public class GridPanel extends JPanel {
 				}
 				loaded = true;
 				br.close();
-				System.out.println("loaded");
 				System.out.println(this.windowWidth + " " + this.windowHeight + " " + this.cols + " " + this.rows + " " + this.pixelWidth + " " + this.pixelHeight);
 			}
 		} catch (FileNotFoundException e1) {
